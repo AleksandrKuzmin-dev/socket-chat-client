@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 
-const socket = io.connect("https://socket-chat-server-gamma.vercel.app/");
+const socket = io.connect("https://socket-chat-server-5xgy.onrender.com");
 
 const useSocket = (userParams, setMessages, setNumberUsersInRoom) => {
     const navigate = useNavigate();
