@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from "react-router-dom";
-import EmojiPicker from "emoji-picker-react";
+
 import useSocket from '../../hooks/useSocket';
 import Messages from '../Messages/Messages';
+import MessageInput from '../MessageInput/MessageInput';
 
-import icon from '../../assets/emoji.svg';
 import styles from './chat.module.css';
 
 const Chat = () => {
@@ -15,14 +15,11 @@ const Chat = () => {
 
     const [messages, setMessages] = useState([]);
     const [numberUsersInRoom, setNumberUsersInRoom] = useState(0);
-    const [enteredMessage, setEnteredMessage] = useState('');
-    const [isEmojiListOpen, setIsEmojiListOpen] = useState(false);
     const [autoScroll, setAutoScroll] = useState(true);
 
     const { search } = useLocation();
     const chatRef = useRef();
-    const emojiListRef = useRef();
-
+ 
     useEffect(() => {
         const searchParams = Object.fromEntries(new URLSearchParams(search));
         setUserParams(searchParams);
@@ -38,7 +35,7 @@ const Chat = () => {
             } else {
                 setAutoScroll(false);
             }
-        }
+        };
 
         chat.addEventListener('scroll', handleScroll);
 
@@ -57,38 +54,9 @@ const Chat = () => {
         };
     }, [messages]);
 
-    useEffect(() => {
-        const emojiList = emojiListRef.current;
-        if(!emojiList) return;
-   
-        const handleEscape = (e) => {
-            if (e.key === 'Escape') setIsEmojiListOpen(false);
-        };
-
-        const handleClick = (e) => {
-            if (!emojiList.contains(e.target)) {
-                setIsEmojiListOpen(false);
-            }
-        };
-
-        document.addEventListener('click', handleClick);
-        document.addEventListener('keydown', handleEscape);
-
-        return () => {
-            document.removeEventListener('click', handleClick);
-            document.removeEventListener('keydown', handleEscape);
-        }
-
-
-    }, [emojiListRef]);
-
     const { sendMessage, leaveRoom } = useSocket(userParams, setMessages, setNumberUsersInRoom);
 
-    const handleEnteredMessage = ({ target: { value } }) => setEnteredMessage(value);
-
-    const onEmojiClick = ({ emoji }) => setEnteredMessage(`${enteredMessage}${emoji}`);
-
-    const handleSendMessage = (e) => {
+    const handleSendMessage = (e, enteredMessage, setEnteredMessage) => {
         e.preventDefault();
 
         if (enteredMessage.trim() === '') return;
@@ -117,32 +85,7 @@ const Chat = () => {
                     <Messages messages={messages} name={userParams.name} />
                 </div>
 
-                <form className={styles.form} onSubmit={handleSendMessage}>
-                    <div className={styles.input}>
-                        <input
-                            type="text"
-                            name="message"
-                            placeholder="Что хочешь написать?"
-                            value={enteredMessage}
-                            onChange={handleEnteredMessage}
-                            autoComplete="off"
-                            required
-                        />
-                    </div>
-                    <div className={styles.emoji} ref={emojiListRef}>
-                        <img src={icon} alt="" onClick={() => setIsEmojiListOpen(prevState => !prevState)} />
-
-                        {isEmojiListOpen && (
-                            <div className={styles.emojies}>
-                                <EmojiPicker onEmojiClick={onEmojiClick} skinTonesDisabled theme='dark'/>
-                            </div>
-                        )}
-                    </div>
-
-                    <div className={styles.button}>
-                        <input type="submit" value="Отправить сообщение" />
-                    </div>
-                </form>
+                <MessageInput onSendMessage={handleSendMessage} />
             </div>
             <div className={styles.deviceError}>
                 <p>Извините, на данный момент наш чат не работает с мобильными устройствами.</p>
