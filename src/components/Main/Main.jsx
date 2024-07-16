@@ -32,43 +32,48 @@ const Main = () => {
   };
 
   return (
-    <div className={styles.wrap}>
-       <div className={styles.container}>
-          <h1 className={styles.heading}>Войти в чат</h1>
- 
-          <form className={styles.form} onSubmit={handleFormSubmit}>
-             <div className={styles.group}>
-                <input
-                   type="text"
-                   name="name"
-                   value={formValues.name}
-                   placeholder="Никнейм"
-                   className={styles.input}
-                   onChange={handleInputChange}
-                   autoComplete="off"
-                   required
-                />
-             </div>
-             <div className={styles.group}>
-                <input
-                   type="text"
-                   name="room"
-                   placeholder="Название комнаты"
-                   value={formValues.room}
-                   className={styles.input}
-                   onChange={handleInputChange}
-                   autoComplete="off"
-                   required
-                />
-             </div>
-             <div className={styles.group}>
-                <button type="submit" className={styles.button}>
-                   Войти
-                </button>
-             </div>
-          </form>
-       </div>
-    </div>
+   <>
+      <div className={styles.wrap}>
+         <div className={styles.container}>
+            <h1 className={styles.heading}>Войти в чат</h1>
+   
+            <form className={styles.form} onSubmit={handleFormSubmit}>
+               <div className={styles.group}>
+                  <input
+                     type="text"
+                     name="name"
+                     value={formValues.name}
+                     placeholder="Никнейм"
+                     className={styles.input}
+                     onChange={handleInputChange}
+                     autoComplete="off"
+                     required
+                  />
+               </div>
+               <div className={styles.group}>
+                  <input
+                     type="text"
+                     name="room"
+                     placeholder="Название комнаты"
+                     value={formValues.room}
+                     className={styles.input}
+                     onChange={handleInputChange}
+                     autoComplete="off"
+                     required
+                  />
+               </div>
+               <div className={styles.group}>
+                  <button type="submit" className={styles.button}>
+                     Войти
+                  </button>
+               </div>
+            </form>
+         </div>
+      </div>
+      <div className={styles.deviceError}>
+         <p>Извините, на данный момент наш чат не работает с мобильными устройствами.</p>
+      </div>
+    </>
  );
 }
 

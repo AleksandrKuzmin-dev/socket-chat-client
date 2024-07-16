@@ -127,3 +127,23 @@
     transform: translateX(-50%);
     bottom: 100%;
   }
+
+  .deviceError {
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 0 15px;
+  }
+
+  @media screen and (max-width: 960px) {
+    .deviceError {
+      display: flex;
+    }
+
+    .wrap {
+      display: none;
+    }
+}
