@@ -1,8 +1,23 @@
-# React + Vite
+# Онлайн чат на React
+![Static Badge](https://img.shields.io/badge/React-blue)
+![Static Badge](https://img.shields.io/badge/SocketIO-green)
+![Static Badge](https://img.shields.io/badge/Router-black)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Функционал приложения:
+- Вход и выход в комнаты по названию
+- Отправка и получение сообщений в реальном времени
+- Возможность отправки смайликов
+- Автопрокрутка сообщений
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Запуск приложения
+-  Перейдите по ссылке: https://socket-chat-client-dusky.vercel.app/
+
+## Стек
+- React JS.
+- React Router v6 для навигации между страницами
+- Socket.IO для связи в реальном времени
+- Vite (шаблон React) для сборки приложения
+
+## Пример работы приложения
+![Изображение](/readme/chat.gif "Изображение приложения")
